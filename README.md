@@ -1,1 +1,0 @@
-# WBGT_MapPlotter
