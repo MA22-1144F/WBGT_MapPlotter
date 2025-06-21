@@ -445,10 +445,22 @@ class KanagawaWBGTMapper:
             '''
             m.get_root().html.add_child(folium.Element(update_button_html))
             
+            # 出典表示
+            copyright_html = '''
+            <div style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); 
+                        z-index: 9999; text-align: left; font-size: 9px; color: #666;
+                        background-color: rgba(255,255,255,0.8); padding: 3px 8px; 
+                        border-radius: 3px; max-width: 600px; width: 600px;">
+                <div>国土数値情報(国土交通省)(https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v3_1.html)よりデータを取得・加工して作成</div>
+                <div>暑さ指数(WBGT)予測値等 電子情報提供サービス(環境省)(https://www.wbgt.env.go.jp/data_service.php)よりデータを取得・加工して作成</div>
+            </div>
+            '''
+            m.get_root().html.add_child(folium.Element(copyright_html))
+            
             # 時間スライダ
             slider_html = f'''
             <div style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); 
-                        z-index: 9999; width: 400px;">
+                        z-index: 10000; width: 400px;">
                 <div style="text-align: center; margin-bottom: 8px;">
                     <div id="timeDisplay" style="font-size: 14px; color: #333; font-weight: bold;">
                         {time_slots[0].strftime("%Y年%m月%d日 %H時") if time_slots else ""}
@@ -461,18 +473,6 @@ class KanagawaWBGTMapper:
             </div>
             '''
             m.get_root().html.add_child(folium.Element(slider_html))
-            
-            # 出典表示
-            copyright_html = '''
-            <div style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); 
-                        z-index: 9999; text-align: left; font-size: 9px; color: #666;
-                        background-color: rgba(255,255,255,0.8); padding: 3px 8px; 
-                        border-radius: 3px; max-width: 90%;">
-                <div>国土数値情報(国土交通省)(https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v3_1.html)よりデータを取得・加工して作成</div>
-                <div>暑さ指数(WBGT)予測値等 電子情報提供サービス(環境省)(https://www.wbgt.env.go.jp/data_service.php)よりデータを取得・加工して作成</div>
-            </div>
-            '''
-            m.get_root().html.add_child(folium.Element(copyright_html))
             
             js_code = f'''
             <style>
@@ -651,7 +651,7 @@ class KanagawaWBGTMapper:
     def save_and_open_map(self, map_obj, filename="kanagawa_wbgt_map.html"):
         try:
             output_path = self.output_dir / filename
-            # map_obj.save(str(output_path))
+            map_obj.save(str(output_path))
             webbrowser.open(f"file://{output_path.resolve()}")
             return str(output_path)
         except Exception as e:
