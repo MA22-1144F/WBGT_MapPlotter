@@ -416,7 +416,7 @@ class KanagawaWBGTMapper:
             # 凡例
             legend_html = '''
             <div style="position: fixed; 
-                        bottom: 120px; left: 20px; width: 200x; height: 220px; 
+                        bottom: 130px; left: 20px; width: 200x; height: 220px; 
                         background-color: white; border:2px solid grey; z-index:9999; 
                         font-size:12px; padding: 10px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
             <p style="margin: 0 0 8px 0;"><b>WBGT危険度レベル</b></p>
